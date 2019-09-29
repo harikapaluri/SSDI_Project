@@ -1,0 +1,2 @@
+eclipse.preferences.version=1
+excludePatterns=**/*-*.*.*.js,**/*.min.js,**/.*,.*,dist,node_modules,src/karma.conf.js,
