@@ -1,45 +1,66 @@
 <!DOCTYPE html>
 <html>
-   <head>
-      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-      <title>AngularJS</title>
-      
-      <!-- Javascript Files -->      
-      <script type="text/javascript" src="resource/js/angular_v1.6.0.js"></script>	    	   
-      <script type="text/javascript" src="resource/js/form.js"></script>    
-           
-      <!-- Bootstrap Css -->
-      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-      
-      <style type="text/css">
-      	.marginTop14 {
-      		margin-top: 14px;
-      	}
-      </style>
-   </head>
-   <body>
-      <h2 align="center" class="text-primary">Book And Go</h2>
-      <div ng-app="myApp">
-         <form ng-controller="EmployeeController" ng-submit="getData()">
-            <p>
-               <button id="formBtn" type="submit" class="btn btn-primary center-block marginTop14">Get Data from Db</button>
-            </p>
-           	<div id="empTblContainer" class="container" ng-show="empList.length">
-           		<table id="empTbl" class="table table-bordered marginTop14">
-              		<thead>
-                 		<tr>
-                    		<th>Id</th><th>Name</th><th>Email</th><th>Gender</th>
-                 		</tr>
-              		</thead>
-              		<tbody>
-                 		<tr ng-repeat="detail in empList">
-                    		<td><span id="emp-id">{{detail.map.emp_id}}</span></td><td><span id="emp-name">{{detail.map.emp_name}}</span></td><td><span id="emp-email">{{detail.map.emp_email}}</span></td><td><span id="emp-gender">{{detail.map.emp_gender}}</span></td>
-                 		</tr>
-              		</tbody>
-           		</table>
-           	</div>    
-           	<div id="errorTxt" ng-show="noEmpRecord.length" class="text-center text-danger marginTop14"><h5>No record found in the database!</h5></div>
-         </form>
-      </div>
-   </body>
+<head>
+<title>AngularJS Routing with Multiple Views Example</title>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-route.min.js"></script>
+<script src="resource/js/controller/Login.js"></script>
+<script src="resource/js/controller/Hotel.js"></script>
+<script type="text/javascript">
+var app = angular.module("myApp", ['ngRoute']);
+app.config(['$routeProvider',
+function ($routeProvider) {
+$routeProvider.when('/login', {
+templateUrl: 'resource/js/views/Login.jsp',
+controller: 'login_register_controller'
+}).
+when('/AddMyhotel', {
+templateUrl: 'resource/js/views/AddMyhotel.html',
+controller: 'hotelController'
+}).
+otherwise({
+redirectTo: '/login'
+});
+}
+]);
+app.controller("hotelController", [ '$scope', '$http', function($scope, $http) {
+	$scope.message='Testing if hotel controller works';
+	}]);
+app.controller('login_register_controller', function($scope, $http){
+	debugger
+	 $scope.closeMsg = function(){
+	  $scope.alertMsg = false;
+	 };
+
+	 $scope.login_form = true;
+
+	 $scope.showRegister = function(){
+	  $scope.login_form = false;
+	  $scope.register_form = true;
+	  $scope.alertMsg = false;
+	 };
+	 
+
+	 $scope.showLogin = function(){
+	  $scope.register_form = false;
+	  $scope.login_form = true;
+	  $scope.alertMsg = false;
+	 };
+	});
+</script>
+</head>
+<body ng-app="myApp">
+<h2>Book And Go</h2>
+<div>
+<ul>
+<li>
+<a href="#/login">Login</a>
+</li>
+<li>
+<a href="#/AddMyhotel">Add my hotel</a>
+</li>
+</ul>
+<div ng-view></div>
+</div>
+</body>
 </html>

@@ -1,5 +1,5 @@
 /**** CREATE TABLE ****/
-USE Sample;
+USE test;
 CREATE TABLE employeetbl (
         e_id INT NOT NULL AUTO_INCREMENT,
         e_name VARCHAR(100),
