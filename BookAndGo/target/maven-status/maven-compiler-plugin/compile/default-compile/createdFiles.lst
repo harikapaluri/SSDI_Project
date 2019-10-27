@@ -7,3 +7,4 @@ com\jcg\java\config\MyDb.class
 com\jcg\java\services\LoginServlet.class
 com\jcg\java\model\Employee.class
 com\jcg\java\restServices\RestSampleController.class
+com\jcg\java\restServices\MainController.class

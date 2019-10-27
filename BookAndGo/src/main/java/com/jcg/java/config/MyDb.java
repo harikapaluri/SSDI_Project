@@ -10,6 +10,7 @@ import java.util.List;
 
 import com.jcg.java.model.Employee;
 import com.jcg.java.model.Hotel;
+import com.jcg.java.model.User;
 
 public class MyDb {
 
@@ -25,7 +26,7 @@ public class MyDb {
 	      String password =  "password";
 	      String hostname = "ssdi-project-db.cxqdrxxfwjtl.us-east-2.rds.amazonaws.com";
 	      String port = "3306";
-	      String jdbcUrl = "jdbc:mysql://localhost:3306/test";
+	      String jdbcUrl = "jdbc:mysql://localhost:3306/bookandgo";
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 			connObj = DriverManager.getConnection(jdbcUrl,userName,password);			
@@ -83,5 +84,25 @@ public class MyDb {
 				disconnectDb();
 			}
 			return eList;
+		}
+		//Method to get username and password searched by user
+		public String getLoginDetailsFromDb(User user){
+			String response="No user Exists";
+			try {
+				
+	           	String sql = "SELECT * FROM Users WHERE users_email="+user.users_email;
+	           	stmtObj = connectDb().prepareStatement(sql);
+				rsObj = stmtObj.executeQuery(sql);
+				if(rsObj!=null) {
+					response="Logged in";
+				}
+				
+			} catch (SQLException sqlExObj) {
+				sqlExObj.printStackTrace();
+			} finally {
+				
+			}
+			return response;
+			
 		}
 }

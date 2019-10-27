@@ -54,46 +54,16 @@
        <input type="password" name="password" ng-model="loginData.password" class="form-control" />
       </div>
       <div class="form-group" align="center">
-       <input type="submit" name="login" class="btn btn-primary" value="Login" />
+       <input type="submit" name="login" class="btn btn-primary" value="Login" ng-click="showLogin()" />
        <br />
        <input type="button" name="register_link" class="btn btn-primary btn-link" ng-click="showRegister()" value="Register" />
       </div>
      </form>
     </div>
    </div>
-    <!-- <?php
-   }
-   else
-   {
-   ?>
-   <div class="panel panel-default">
-    <div class="panel-heading">
-     <h3 class="panel-title">Welcome to system</h3>
-    </div>
-    <div class="panel-body">
-     <h1>Welcome - <?php echo $_SESSION["name"];?></h1>
-     <a href="logout.php">Logout</a>
-    </div>
    </div>
-   <?php
-   }
-   ?>
--->
-  </div>
-   
- 
-           
-           
-           
    </form>
    </div>  
-
-	       
-       
-
-
-
-   
 </body>
 </html>
 

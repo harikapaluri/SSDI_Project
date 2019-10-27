@@ -27,7 +27,7 @@ app.controller("hotelController", [ '$scope', '$http', function($scope, $http) {
 	$scope.message='Testing if hotel controller works';
 	}]);
 app.controller('login_register_controller', function($scope, $http){
-	debugger
+	
 	 $scope.closeMsg = function(){
 	  $scope.alertMsg = false;
 	 };

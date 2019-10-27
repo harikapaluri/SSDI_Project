@@ -28,6 +28,7 @@ app.controller("hotelController", [ '$scope', '$http', function($scope, $http) {
 	}]);
 app.controller('login_register_controller', function($scope, $http){
 	
+   
 	 $scope.closeMsg = function(){
 	  $scope.alertMsg = false;
 	 };
@@ -45,6 +46,24 @@ app.controller('login_register_controller', function($scope, $http){
 	  $scope.register_form = false;
 	  $scope.login_form = true;
 	  $scope.alertMsg = false;
+	 };
+	 
+	 $scope.showLogin= function(){
+		 
+	      
+	 };
+	 $scope.submitLogin= function(){
+		var userId=$scope.loginData.email;
+		var password=$scope.loginData.password;
+		$http.get("http://localhost:8081/AngularJsSqlEx/rest/BookAndGo/Login/"+userId+"/"+password).then(
+			      function successCallback(response) {
+			    	$scope.response = response;
+			      },
+			      function errorCallback(response) {
+			    	  $scope.response = response;
+			        console.log("Unable to perform get request");
+			      }
+			    );
 	 };
 	});
 </script>

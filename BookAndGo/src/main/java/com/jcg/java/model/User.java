@@ -10,6 +10,7 @@ public class User {
 	public int getUsers_id() {
 		return users_id;
 	}
+	public User() {}
 	public User(int users_id, String users_nameFirst, String users_nameLast, String users_email, String users_type,
 			String users_password) {
 		super();
