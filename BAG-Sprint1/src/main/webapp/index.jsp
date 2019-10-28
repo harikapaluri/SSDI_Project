@@ -26,7 +26,7 @@ redirectTo: '/login'
 app.controller("hotelController", [ '$scope', '$http', function($scope, $http) {
 	$scope.message='Testing if hotel controller works';
 	}]);
-app.controller('login_register_controller', function($scope, $http){
+app.controller('login_register_controller', function($location,$scope, $http){
 	
    
 	 $scope.closeMsg = function(){
@@ -53,14 +53,18 @@ app.controller('login_register_controller', function($scope, $http){
 	      
 	 };
 	 $scope.submitLogin= function(){
-		var userId=$scope.loginData.email;
+var userId=$scope.loginData.email;
 		var password=$scope.loginData.password;
 		$http.get("http://localhost:8081/AngularJsSqlEx/rest/BookAndGo/Login/"+userId+"/"+password).then(
 			      function successCallback(response) {
 			    	$scope.response = response;
+			    	alert($scope.response.data);
+			    	$location.path('\AddMyhotel');
 			      },
 			      function errorCallback(response) {
+			    	 
 			    	  $scope.response = response;
+			    	  alert($scope.response.data);
 			        console.log("Unable to perform get request");
 			      }
 			    );
