@@ -90,7 +90,7 @@ public class MyDb {
 			String response="No user Exists";
 			try {
 				
-	           	String sql = "SELECT * FROM Users WHERE users_email="+user.users_email;
+	           	String sql ="select *  from USERS WHERE users_id = '" + user.users_email + "' AND users_password = '" + user.users_password + "'";
 	           	stmtObj = connectDb().prepareStatement(sql);
 				rsObj = stmtObj.executeQuery(sql);
 				if(rsObj!=null) {
