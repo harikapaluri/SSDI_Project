@@ -14,9 +14,9 @@ import com.jcg.java.model.User;
 public class MainController {
     MyDb db=new MyDb();
 	@GET
-	@Path("Login/{param}/{param}")
+	@Path("Login/{param}/{params}")
 	@Produces(MediaType.TEXT_PLAIN)
-	public Response getLoginResponse(@PathParam("param") String userId,@PathParam("param") String password) {
+	public Response getLoginResponse(@PathParam("param") String userId,@PathParam("params") String password) {
             User user=new User();
             user.setUsers_email(userId);
             user.setUsers_password(password);
