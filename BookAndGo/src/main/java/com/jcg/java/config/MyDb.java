@@ -111,7 +111,7 @@ public class MyDb {
 			} catch (SQLException sqlExObj) {
 				sqlExObj.printStackTrace();
 			} finally {
-				disconnectDb();
+				//disconnectDb();
 				return response;
 			}
 			
