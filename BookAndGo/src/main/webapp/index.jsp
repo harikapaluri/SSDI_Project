@@ -17,15 +17,52 @@ controller: 'login_register_controller'
 when('/AddMyhotel', {
 templateUrl: 'resource/js/views/AddMyhotel.html',
 controller: 'hotelController'
-}).
+}).when('/Register', {
+	templateUrl: 'resource/js/views/Register.jsp',
+	controller: 'registerController'
+	}).
 otherwise({
 redirectTo: '/login'
 });
 }
 ]);
-app.controller("hotelController", [ '$location','$scope', '$http', function($location,$scope, $http) {
-	$scope.message='Testing if hotel controller works';
-	}]);
+//Registration controller
+app.controller("registerController",function($location,$scope,$http){
+	
+});
+app.controller("hotelController", function($location,$scope, $http) {
+	
+	$scope.hotel_form=true;
+	$scope.message={
+			hotel_name:'',
+			hotel_address:'',
+			hotel_contact:'',
+			hotel_emailid:''
+			
+	};
+	 $scope.hotelData = angular.copy($scope.message);
+	$scope.submitHotel= function(){
+		debugger
+	
+		var onSuccess = function (data, status, headers, config) {
+            alert('Hotel Details saved successfully.');
+        };
+
+        var onError = function (data, status, headers, config) {
+            alert('Error occured.');
+        }
+      //Hotel post request
+     // $http.post('http://localhost:8081/AngularJsSqlEx/rest/BookAndGo/AddHotelDetails', JSON.stringify($scope.hotelData)).then(function (response) {
+	//if(response.data=="Added"){
+		//alert('Hotel Details saved successfully.');
+	//}else{
+		//alert('Error occured.');
+	//}
+      //});
+        
+	}
+	
+	});
 app.controller('login_register_controller', function($location,$scope, $http){
 	
    
@@ -38,7 +75,7 @@ app.controller('login_register_controller', function($location,$scope, $http){
 	 $scope.showRegister = function(){
 	  $scope.login_form = false;
 	  $scope.register_form = true;
-	  $scope.alertMsg = false;
+	  $location.path('\Register');
 	 };
 	 
 
@@ -46,14 +83,14 @@ app.controller('login_register_controller', function($location,$scope, $http){
 	  $scope.register_form = false;
 	  $scope.login_form = true;
 	  $scope.alertMsg = false;
-	 };
+	   };
 	 
 	 $scope.showLogin= function(){
 		 
 	      
 	 };
 	 $scope.submitLogin= function(){
-		 debugger
+		 
 		var userId=$scope.loginData.email;
 		var password=$scope.loginData.password;
 		$http.get("http://localhost:8081/AngularJsSqlEx/rest/BookAndGo/Login/"+userId+"/"+password).then(
@@ -63,7 +100,7 @@ app.controller('login_register_controller', function($location,$scope, $http){
 			    	$location.path('\AddMyhotel');
 			      },
 			      function errorCallback(response) {
-			    	  debugger
+			    	 
 			    	  $scope.response = response;
 			    	  alert($scope.response.data);
 			        console.log("Unable to perform get request");

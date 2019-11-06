@@ -1,9 +1,19 @@
 package com.jcg.java.model;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement
 public class Hotel {
       public int hotel_id;
-      public String hotel_name;
+      public String getHotel_contact() {
+		return hotel_contact;
+	}
+	public void setHotel_contact(String hotel_contact) {
+		this.hotel_contact = hotel_contact;
+	}
+	public String hotel_name;
       public String hotel_address;
+      public String hotel_contact;
       public int Event_id;
       public int Room_id;
 	public Hotel() {

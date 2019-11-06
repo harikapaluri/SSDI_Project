@@ -11,6 +11,7 @@ import java.util.List;
 import com.jcg.java.model.Employee;
 import com.jcg.java.model.Hotel;
 import com.jcg.java.model.User;
+import com.mysql.jdbc.PreparedStatement;
 
 public class MyDb {
 
@@ -88,22 +89,51 @@ public class MyDb {
 		//Method to get username and password searched by user
 		public String getLoginDetailsFromDb(User user){
 			String response="No user Exists";
+			String correctpwd="";
 			try {
 				
-	           	String sql ="select * from USERS WHERE users_id = '" + user.users_email + "' AND users_password = '" + user.users_password + "'";
+	           	String sql ="select *  from USERS WHERE users_email = '" + user.users_email + "' AND users_password = " + user.users_password ;
 	           	stmtObj = connectDb().prepareStatement(sql);
 				rsObj = stmtObj.executeQuery(sql);
 				
-				if(rsObj.next()) {
-					response="Logged in";
+		        if(rsObj.next()){
+		        	correctpwd=rsObj.getString("users_password");
+					
 				}
+		        
+		        if(correctpwd.equalsIgnoreCase(user.users_password)) {
+		        	response="Logged in";
+		        	
+		        }else {
+		        
+		        }
 				
 			} catch (SQLException sqlExObj) {
 				sqlExObj.printStackTrace();
 			} finally {
-				
+				disconnectDb();
+				return response;
 			}
-			return response;
+			
 			
 		}
+
+	
+	  public String saveHotelDetails(Hotel hotel) { // TODO Auto-generated method
+	 String response="Db error"; try {
+	 
+	  String sql ="INSERT INTO Hotel " + "VALUES (?,?,?, ?, ?,?)";
+	  java.sql.PreparedStatement ps = connectDb().prepareStatement(sql);
+	  ps.setString(1,hotel.getHotel_name()); ps.setInt(2,1);
+	  ps.setString(3,hotel.getHotel_address()); ps.setInt(4,0); ps.setInt(5,0);
+	  ps.setString(6,hotel.getHotel_contact()); rsObj = stmtObj.executeQuery(sql);
+	  
+	  if(rsObj.rowInserted()){ response="Added";
+	  
+	  }
+	  
+	  
+	  } catch (SQLException sqlExObj) { sqlExObj.printStackTrace(); } finally {
+	  disconnectDb(); return response; } }
+	 
 }
