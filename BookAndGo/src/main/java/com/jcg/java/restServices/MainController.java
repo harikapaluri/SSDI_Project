@@ -45,4 +45,20 @@ public class MainController {
 		 
     	
 }
+    
+    @GET
+   	@Path("/PaymentDetails/{param}")
+   	@Produces(MediaType.TEXT_PLAIN)
+   	public Response getPaymentDetails(@PathParam("param") String users_nameFirst) {
+               User user=new User();
+               user.setUsers_nameFirst(users_nameFirst);
+               //user.setUsers_password(password);
+   		String response=db.getPaymentDetailsFromDb(user);
+           if(response.equalsIgnoreCase("Payment Successful"))
+   		{return Response.status(200).entity(response).build();}else {
+   			
+   			return Response.status(404).entity(response).build();
+   		}
+    
+   	}
 }

@@ -6,6 +6,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-route.min.js"></script>
 <script src="resource/js/controller/Login.js"></script>
 <script src="resource/js/controller/Hotel.js"></script>
+<script src="resource/js/controller/PaymentDetails.js"></script>
 <script type="text/javascript">
 var app = angular.module("myApp", ['ngRoute']);
 app.config(['$routeProvider',
@@ -17,10 +18,15 @@ controller: 'login_register_controller'
 when('/AddMyhotel', {
 templateUrl: 'resource/js/views/AddMyhotel.html',
 controller: 'hotelController'
-}).when('/Register', {
+}).
+when('/Register', {
 	templateUrl: 'resource/js/views/Register.jsp',
 	controller: 'registerController'
 	}).
+	when('/PaymentDetails', {
+		templateUrl: 'resource/js/views/PaymentDetails.jsp',
+		controller: 'payment_controller'
+		}).
 otherwise({
 redirectTo: '/login'
 });
@@ -93,7 +99,7 @@ app.controller('login_register_controller', function($location,$scope, $http){
 		 
 		var userId=$scope.loginData.email;
 		var password=$scope.loginData.password;
-		$http.get("http://localhost:8081/AngularJsSqlEx/rest/BookAndGo/Login/"+userId+"/"+password).then(
+		$http.get("http://localhost:8080/AngularJsSqlEx/rest/BookAndGo/Login/"+userId+"/"+password).then(
 			      function successCallback(response) {
 			    	$scope.response = response;
 			    	alert($scope.response.data);
@@ -108,6 +114,15 @@ app.controller('login_register_controller', function($location,$scope, $http){
 			    );
 	 };
 	});
+app.controller("payment_controller",function($location,$scope,$http){
+	$scope.submitLogin= function(){
+		  $scope.register_form = false;
+		  $scope.login_form = false;
+		  $scope.alertMsg = true;
+		  $scope.paymentForm=true;
+		 // $location.path('\PaymentDetails');
+	 };
+});
 </script>
 </head>
 <body ng-app="myApp">
@@ -119,6 +134,9 @@ app.controller('login_register_controller', function($location,$scope, $http){
 </li>
 <li>
 <a href="#/AddMyhotel">Add my hotel</a>
+</li>
+<li>
+<a href="#/PaymentDetails">PaymentDetails</a>
 </li>
 </ul>
 <div ng-view></div>
