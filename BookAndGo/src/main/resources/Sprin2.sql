@@ -19,6 +19,7 @@ CREATE TABLE event
  event_times VARCHAR(25),
  hotel_id int(25)
  );
+ INSERT INTO event
  VALUES
 ( 'Ladies Night','0006', '10 am to 12pm MWF ',2001),
 ( 'Karaoke Night', '0001', '10 am to 12pm MWF',2002),
@@ -30,7 +31,7 @@ CREATE TABLE event
  room_floor int(25),
  room_type VARCHAR (25),
  roomAvailableFlag VARCHAR (25),
- roomPrice VARCHAR(25);
+ roomPrice VARCHAR(25),
  no_of_beds int(25)
  );
 
