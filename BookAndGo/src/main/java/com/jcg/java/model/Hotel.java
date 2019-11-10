@@ -5,7 +5,21 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 public class Hotel {
       public int hotel_id;
-      public String getHotel_contact() {
+      public String event_name;
+      public String event_times;
+      public String getEvent_name() {
+		return event_name;
+	}
+	public void setEvent_name(String event_name) {
+		this.event_name = event_name;
+	}
+	public String getEvent_times() {
+		return event_times;
+	}
+	public void setEvent_times(String event_times) {
+		this.event_times = event_times;
+	}
+	public String getHotel_contact() {
 		return hotel_contact;
 	}
 	public void setHotel_contact(String hotel_contact) {
@@ -25,12 +39,11 @@ public class Hotel {
 	public void setEvent_id(int event_id) {
 		Event_id = event_id;
 	}
-	public Hotel(int hotel_id, String hotel_name, String hotel_address, int event_id, int room_id) {
+	public Hotel(int hotel_id, String hotel_name, String hotel_address, int room_id) {
 		super();
 		this.hotel_id = hotel_id;
 		this.hotel_name = hotel_name;
 		this.hotel_address = hotel_address;
-		Event_id = event_id;
 		room_id = room_id;
 	}
 	public int getRoom_id() {

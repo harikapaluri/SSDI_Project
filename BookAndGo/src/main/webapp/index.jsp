@@ -4,8 +4,8 @@
 <title>AngularJS Routing with Multiple Views Example</title>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-route.min.js"></script>
-<script src="resource/js/controller/Login.js"></script>
-<script src="resource/js/controller/Hotel.js"></script>
+
+
 <script type="text/javascript">
 var app = angular.module("myApp", ['ngRoute']);
 app.config(['$routeProvider',
@@ -17,11 +17,17 @@ controller: 'login_register_controller'
 when('/AddMyhotel', {
 templateUrl: 'resource/js/views/AddMyhotel.html',
 controller: 'hotelController'
-}).when('/Register', {
+}).
+when('/Register', {
 	templateUrl: 'resource/js/views/Register.jsp',
 	controller: 'registerController'
 	}).
-otherwise({
+	when('/homepage', {
+        templateUrl: 'resource/js/views/UserDashboard.jsp',
+        controller:'SearchController'
+        
+      }).
+      otherwise({
 redirectTo: '/login'
 });
 }
@@ -42,8 +48,6 @@ app.controller("hotelController", function($location,$scope, $http) {
 	};
 	 $scope.hotelData = angular.copy($scope.message);
 	$scope.submitHotel= function(){
-		debugger
-	
 		var onSuccess = function (data, status, headers, config) {
             alert('Hotel Details saved successfully.');
         };
@@ -51,21 +55,12 @@ app.controller("hotelController", function($location,$scope, $http) {
         var onError = function (data, status, headers, config) {
             alert('Error occured.');
         }
-      //Hotel post request
-     // $http.post('http://localhost:8081/AngularJsSqlEx/rest/BookAndGo/AddHotelDetails', JSON.stringify($scope.hotelData)).then(function (response) {
-	//if(response.data=="Added"){
-		//alert('Hotel Details saved successfully.');
-	//}else{
-		//alert('Error occured.');
-	//}
-      //});
-        
+           
 	}
 	
 	});
 app.controller('login_register_controller', function($location,$scope, $http){
 	
-   
 	 $scope.closeMsg = function(){
 	  $scope.alertMsg = false;
 	 };
@@ -93,7 +88,7 @@ app.controller('login_register_controller', function($location,$scope, $http){
 		 
 		var userId=$scope.loginData.email;
 		var password=$scope.loginData.password;
-		$http.get("http://localhost:8081/AngularJsSqlEx/rest/BookAndGo/Login/"+userId+"/"+password).then(
+		$http.get("http://localhost:8080/BnG/rest/BookAndGo/Login/"+userId+"/"+password).then(
 			      function successCallback(response) {
 			    	$scope.response = response;
 			    	alert($scope.response.data);
@@ -108,6 +103,71 @@ app.controller('login_register_controller', function($location,$scope, $http){
 			    );
 	 };
 	});
+	//Search Controller
+	app.controller('SearchController', function($location,$scope, $http){
+		$scope.roomavailable="Room Types available";
+		//Loading initial data
+		// The data model. These items would normally be requested via AJAX,
+			// but are hardcoded here for simplicity. See the next example for
+			// tips on using AJAX.
+        debugger
+		$scope.items = [
+			{
+				url: 'http://tutorialzine.com/2013/07/50-must-have-plugins-for-extending-twitter-bootstrap/',
+				hotel_name: 'Marriot Hotel',
+				image:'resource/js/images/marriot.png',
+				hotel_address:'2832 Charlotte,NC',
+				event_name:'Ladies night',
+				room_type:'203,204,205'
+			},
+			{
+				url: 'http://tutorialzine.com/2013/08/simple-registration-system-php-mysql/',
+				hotel_name:'',
+				image:'resource/js/images/marriot.png',
+				hotel_address:'2832 Charlotte,NC',
+				event_name:'Ladies night',
+					room_type:'203,204,205'
+			},
+			{
+				url: 'http://tutorialzine.com/2013/08/simple-registration-system-php-mysql/',
+				hotel_name:'',
+				image:'resource/js/images/marriot.png',
+				hotel_address:'2832 Charlotte,NC',
+				event_name:'Ladies night',
+					room_type:'203,204,205'
+			}
+		];
+		
+		$scope.onSearch= function(){
+			//Search by name
+			var searchBy=$scope.searchString;
+			$http.get("http://localhost:8080/BnG/rest/BookAndGo/Search/"+searchBy).then(
+					function successCallback(response){
+						$scope.response = response;
+						$scope.items =$scope.response.data;
+						if($scope.response.data.length==0){
+							$scope.items=[
+								{
+									hotel_name:"Check your spelling .No details are available."
+								}
+						];
+							$scope.roomavailable='';                  
+						}
+						
+					},function errorCallback(response){
+						$scope.response = response;
+						$scope.roomavailable='';
+						
+						
+					}	
+			
+			
+			
+			);		
+			
+			
+		}
+			});
 </script>
 </head>
 <body ng-app="myApp">

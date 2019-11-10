@@ -1,6 +1,6 @@
-
-var app = angular.module('Myapp', []);
+var app = angular.module("myApp", ['ngRoute']);
 app.controller('login_register_controller', function($scope, $http){
+debugger
  $scope.closeMsg = function(){
   $scope.alertMsg = false;
  };

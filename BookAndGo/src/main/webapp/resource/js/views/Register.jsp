@@ -1,8 +1,10 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
- <title>Register</title>
+ <title>BookAndGo</title>
       
       <!-- Javascript Files -->      
       <script type="text/javascript" src="resource/js/angular_v1.6.0.js"></script>	    	   
@@ -24,13 +26,9 @@
 
  	<h2 align="center" class="text-primary">Book And Go</h2>
  
-     <form method="post" ng-submit="onSubmit()">
+     <form method="post" ng-submit="">
      
-     <div class="form-group">
-       <label>Username:</label>
-     	<input type="radio" name="userType" value="Customer" ng-model="type" class="form-control"> Customer<br>
-		<input type="radio" name="userType" value="hotelManager" ng-model="type" class="form-control"> Hotel Manager
-      </div>
+   <div class="container form_style">
      
       <div class="form-group">
        <label>Username:</label>
@@ -52,11 +50,12 @@
       
       <div class="form-group">
        <label>Re-enter password:</label>
-       <input type="password" name="repeat-password" ng-model="re-password" class="form-control" />
+       <input type="password" name="repeat-password" ng-model="password" class="form-control" />
       </div>
-      <div class="form-group" align="center">
-       <input type="submit" name="submit" class="btn btn-primary" value="save" ng-click="showSaved()"/>
-       <button class="btn btn-primary btn-link"  type="reset" ng-click="reset()">Clear</button>
+       <div class="form-group" align="center">
+       <input type="submit" name="login" class="btn btn-primary" value="" ng-click="" />
+ 
+      </div>
       </div>
      </form>
 
