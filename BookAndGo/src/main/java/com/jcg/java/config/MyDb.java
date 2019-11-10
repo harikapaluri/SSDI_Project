@@ -11,7 +11,7 @@ import java.util.List;
 import com.jcg.java.model.Employee;
 import com.jcg.java.model.Hotel;
 import com.jcg.java.model.User;
-import com.mysql.jdbc.PreparedStatement;
+
 
 public class MyDb {
 
@@ -23,9 +23,9 @@ public class MyDb {
 	public  Connection connectDb() {
 		
 		String dbName = "test";
-	      String userName = "harika";
-	      String password =  "password";
-	      String hostname = "ssdi-project-db.cxqdrxxfwjtl.us-east-2.rds.amazonaws.com";
+	      String userName = "root";
+	      String password =  "Mission!1234";
+	      String hostname = "localhost";
 	      String port = "3306";
 	      String jdbcUrl = "jdbc:mysql://localhost:3306/bookandgo";
 		try {
@@ -87,6 +87,7 @@ public class MyDb {
 			return eList;
 		}
 		//Method to get username and password searched by user
+		
 		public String getLoginDetailsFromDb(User user){
 			String response="No user Exists";
 			String correctpwd="";
@@ -105,28 +106,30 @@ public class MyDb {
 		        	response="Logged in";
 		        	
 		        }else {
-		        
+		        	return "Wrong user";
 		        }
 				
 			} catch (SQLException sqlExObj) {
 				sqlExObj.printStackTrace();
-			} finally {
-				//disconnectDb();
-				return response;
-			}
+		} 
+			  finally { 
+				  //disconnectDb(); 
+				  return response; }
+			  }
+			 
 			
 			
-		}
+	
 
 	
 	  public String saveHotelDetails(Hotel hotel) { // TODO Auto-generated method
 	 String response="Db error"; try {
 	 
-	  String sql ="INSERT INTO Hotel " + "VALUES (?,?,?, ?, ?,?)";
+	  String sql ="INSERT INTO Hotel " + "VALUES (?,?,?, ?, ?)";
 	  java.sql.PreparedStatement ps = connectDb().prepareStatement(sql);
 	  ps.setString(1,hotel.getHotel_name()); ps.setInt(2,1);
 	  ps.setString(3,hotel.getHotel_address()); ps.setInt(4,0); ps.setInt(5,0);
-	  ps.setString(6,hotel.getHotel_contact()); rsObj = stmtObj.executeQuery(sql);
+	  //ps.setString(6,hotel.getHotel_contact()); rsObj = stmtObj.executeQuery(sql);
 	  
 	  if(rsObj.rowInserted()){ response="Added";
 	  
@@ -135,5 +138,24 @@ public class MyDb {
 	  
 	  } catch (SQLException sqlExObj) { sqlExObj.printStackTrace(); } finally {
 	  disconnectDb(); return response; } }
+
+	public String getPaymentDetailsFromDb(User user) {
+		String response="Payment Unsuccessful";
+		//String correctpwd="";
+		try {
+			
+           	String sql ="INSERT INTO dummy_payment_details (username) VALUES ('" + user.users_nameFirst + "' )" ;
+           	stmtObj = connectDb().prepareStatement(sql);
+            if(rsObj.rowInserted()){ response="Added";
+      	  
+      	  }
+			
+		} catch (SQLException sqlExObj) {
+			sqlExObj.printStackTrace();
+	} 
+		  finally { 
+			  //disconnectDb(); 
+			  return response; }
+	}
 	 
 }
