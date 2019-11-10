@@ -3,7 +3,7 @@ package com.jcg.java.model;
 public class Book {
 
 	public int booking_id;
-	public int Room_id;
+	public String Room_id;
 	public String users_nameFirst;
 	public String users_nameLast;
 	public String users_email;
@@ -12,7 +12,7 @@ public class Book {
 	public Book() {
 	}
 
-	public Book(int booking_id, int room_id, String users_nameFirst, String users_nameLast, String users_email) {
+	public Book(int booking_id, String room_id, String users_nameFirst, String users_nameLast, String users_email) {
 		super();
 		this.booking_id = booking_id;
 		Room_id = room_id;
@@ -29,11 +29,11 @@ public class Book {
 		this.booking_id = booking_id;
 	}
 
-	public int getRoom_id() {
+	public String getRoom_id() {
 		return Room_id;
 	}
 
-	public void setRoom_id(int room_id) {
+	public void setRoom_id(String room_id) {
 		Room_id = room_id;
 	}
 

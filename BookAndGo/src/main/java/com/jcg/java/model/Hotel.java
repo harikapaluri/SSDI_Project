@@ -28,15 +28,15 @@ public class Hotel {
 	public String hotel_name;
       public String hotel_address;
       public String hotel_contact;
-      public int Event_id;
-      public int room_id;
+      public String Event_id;
+      public String room_id;
 	public Hotel() {
 		
 	}
-	public int getEvent_id() {
+	public String getEvent_id() {
 		return Event_id;
 	}
-	public void setEvent_id(int event_id) {
+	public void setEvent_id(String event_id) {
 		Event_id = event_id;
 	}
 	public Hotel(int hotel_id, String hotel_name, String hotel_address, int room_id) {
@@ -46,7 +46,7 @@ public class Hotel {
 		this.hotel_address = hotel_address;
 		room_id = room_id;
 	}
-	public int getRoom_id() {
+	public String getRoom_id() {
 		return room_id;
 	}
 	public void setRoom_id(int room_id) {
